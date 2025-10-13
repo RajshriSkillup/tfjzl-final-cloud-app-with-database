@@ -11,12 +11,12 @@
 
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
+    <nav class="">
+        <div class="">
+            <div class="">
                   <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Home</a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="">
                 {% if user.is_authenticated %}
                 <li>
                     <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
@@ -40,10 +40,15 @@
     </nav>
 
     <!-- Page content -->
-    <div class="container-fluid">
+    <div class="">
             <h2>{{ course.name }}</h2>
-            <div class="card-columns-vertical">
-               
+            <div class="">
+                {% for lesson in course.lesson_set.all %}
+                    <div class="card mt-1">
+                        <div class="card-header"><h5>Lesson {{lesson.order|add:1}}: {{lesson.title}}</h5></div>
+                        <div class="card-body">{{lesson.content}}</div>
+                    </div>
+                {% endfor %}
             </div>
             <!-- Course detail template changes go here -->
     </div>
