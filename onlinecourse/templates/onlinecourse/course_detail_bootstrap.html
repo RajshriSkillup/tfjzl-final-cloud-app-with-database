@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -11,27 +10,25 @@
 
 <body>
     <!-- Navigation bar -->
-    <nav class="">
-        <div class="">
-            <div class="">
-                  <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Home</a>
+    <nav>
+        <div>
+            <div>
+                <a href="{% url 'onlinecourse:index' %}">Home</a>
             </div>
-            <ul class="">
+            <ul>
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-                    <a class="btn btn-link" href="{% url 'onlinecourse:logout' %}">Logout</a>
+                    <a href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a href="{% url 'onlinecourse:logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li>
-                    <form class="form-inline" action="{% url 'onlinecourse:login' %}" method="post">
+                    <form action="{% url 'onlinecourse:login' %}" method="post">
                         {% csrf_token %}
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Username" name="username" >
-                            <input type="password" class="form-control" placeholder="Username" name="psw" >
-                            <button class="btn btn-primary" type="submit">Login</button>
-                            <a class="btn btn-link" href="{% url 'onlinecourse:registration' %}">Sign Up</a>
-                        </div>
+                        <input type="text" placeholder="Username" name="username">
+                        <input type="password" placeholder="Password" name="psw">
+                        <button type="submit">Login</button>
+                        <a href="{% url 'onlinecourse:registration' %}">Sign Up</a>
                     </form>
                 </li>
                 {% endif %}
@@ -40,17 +37,16 @@
     </nav>
 
     <!-- Page content -->
-    <div class="">
-            <h2>{{ course.name }}</h2>
-            <div class="">
-                {% for lesson in course.lesson_set.all %}
-                    <div class="card mt-1">
-                        <div class="card-header"><h5>Lesson {{lesson.order|add:1}}: {{lesson.title}}</h5></div>
-                        <div class="card-body">{{lesson.content}}</div>
-                    </div>
-                {% endfor %}
-            </div>
-            <!-- Course detail template changes go here -->
+    <div>
+        <h2>{{ course.name }}</h2>
+        <div>
+            {% for lesson in course.lesson_set.all %}
+                <div>
+                    <h5>Lesson {{ lesson.order|add:1 }}: {{ lesson.title }}</h5>
+                    <div>{{ lesson.content }}</div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
